@@ -20,7 +20,7 @@ abstract class BaseRecyclerAdapter<T : Any, VH : BaseViewHolder<T>> : RecyclerVi
         else -> proceedPayloads(payloads, holder, position)
     }
 
-    fun proceedPayloads(payloads: MutableList<Any>, holder: VH, position: Int) {}
+    open fun proceedPayloads(payloads: MutableList<Any>, holder: VH, position: Int) {}
 }
 
 abstract class BaseViewHolder<in T : Any>(override val containerView: View?)

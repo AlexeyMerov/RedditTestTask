@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="175dp"
     android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
     app:cardCornerRadius="8dp"
     >
 
@@ -23,7 +21,6 @@
             android:layout_width="100dp"
             android:layout_height="75dp"
             android:contentDescription="@string/image_description"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/post_subreddit_text_view"
             app:layout_constraintEnd_toStartOf="@+id/post_title_text_view"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,34 +32,62 @@
         <TextView
             android:id="@+id/post_title_text_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:maxLines="4"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/post_thumb_image_view"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/first_divider_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/post_thumb_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0"
-            tools:text="Title Line 1\nTitle Line 2\nTitle Line 3\nTitle Line 4"
+            tools:text="Title Line 1\nTitle Line 2\nTitle Line 2\nTitle Line 2"
             />
 
         <TextView
             android:id="@+id/post_rating_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24px"
             android:drawableStart="@drawable/ic_baseline_keyboard_arrow_up_24px"
             android:gravity="center"
+            android:layout_marginTop="3dp"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/divider_view"
-            app:layout_constraintEnd_toStartOf="@+id/post_subreddit_text_view"
+            app:layout_constraintBottom_toTopOf="@+id/second_divider_view"
+            app:layout_constraintEnd_toStartOf="@+id/post_community_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_thumb_image_view"
             tools:text="380k"
+            />
+
+        <View
+            android:id="@+id/first_divider_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/grey_10"
+            app:layout_constraintBottom_toBottomOf="@+id/post_thumb_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/post_thumb_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/post_title_text_view"
+            app:layout_constraintVertical_bias="1"
+            />
+
+        <TextView
+            android:id="@+id/post_community_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/community"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toBottomOf="@+id/post_rating_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/post_subreddit_text_view"
+            app:layout_constraintStart_toStartOf="@+id/post_title_text_view"
+            app:layout_constraintTop_toTopOf="@+id/post_rating_text_view"
             />
 
         <TextView
@@ -72,15 +97,16 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/black"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="@+id/post_rating_text_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/post_title_text_view"
+            app:layout_constraintStart_toEndOf="@+id/post_community_text_view"
             app:layout_constraintTop_toTopOf="@+id/post_rating_text_view"
             tools:text="subreddit"
             />
 
         <View
-            android:id="@+id/divider_view"
+            android:id="@+id/second_divider_view"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="4dp"
@@ -105,7 +131,7 @@
             app:layout_constraintEnd_toStartOf="@+id/post_date_text_view"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_view"
+            app:layout_constraintTop_toBottomOf="@+id/second_divider_view"
             tools:text="AuthorName"
             />
 

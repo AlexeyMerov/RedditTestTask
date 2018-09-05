@@ -25,7 +25,7 @@ class PostRepository(private val mServerCommunicator: ServerCommunicator,
 
         single
                 .map { parseRawData(it) }
-                .doAfterSuccess { mDatabase.postDao().addAll(it) }
+                .doAfterSuccess { mDatabase.postDao().add(it) }
                 .compose(singleTransformer())
                 .subscribe()
     }
