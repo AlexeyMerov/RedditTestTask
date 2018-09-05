@@ -1,34 +1,25 @@
 <resources>
     <string name="app_name">RedditTestTask</string>
-    <string name="latest_posts">Latest posts</string>
+    <string name="latest_posts">Top popular for today</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="image_description">Image Thumbnail</string>
     <string name="community">r/</string>
     <string name="x_hms_ago">%d %s ago</string>
+    <string name="you_don_t_have_any_posts_yet">You don\'t have any posts yet…</string>
 
     <plurals name="seconds_plural">
-        <item quantity="one">second</item>
-        <item quantity="other">seconds</item>
+        <item quantity="one">%d second</item>
+        <item quantity="other">%d seconds</item>
     </plurals>
 
     <plurals name="minutes_plural">
-        <item quantity="one">minute</item>
-        <item quantity="other">minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
     </plurals>
 
     <plurals name="hours_plural">
-        <item quantity="one">hour</item>
-        <item quantity="other">hours</item>
-    </plurals>
-
-    <plurals name="days_plural">
-        <item quantity="one">day</item>
-        <item quantity="other">days</item>
-    </plurals>
-
-    <plurals name="month_plural">
-        <item quantity="one">month</item>
-        <item quantity="other">months</item>
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
     </plurals>
 
 </resources>

@@ -11,7 +11,7 @@ interface ApiService {
     fun getPosts(@Query("count") count: Int = 25): Single<PostsResponse>
 
     @GET("r/popular/top/.json")
-    fun getPosts(@Query("before") lastPostName: String,
+    fun getPosts(@Query("after") lastPostName: String,
                  @Query("count") count: Int = 25): Single<PostsResponse>
 
 }

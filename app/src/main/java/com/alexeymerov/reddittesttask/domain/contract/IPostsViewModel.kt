@@ -13,4 +13,6 @@ abstract class IPostsViewModel(application: Application) : BaseViewModel(applica
 
     abstract fun clearOldPosts()
 
+    abstract fun loadNextPosts(totalItemsCount: Int)
+
 }

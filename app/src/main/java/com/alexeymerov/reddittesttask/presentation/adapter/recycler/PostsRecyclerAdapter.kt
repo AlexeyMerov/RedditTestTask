@@ -48,7 +48,8 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
     }
 
     override fun proceedPayloads(payloads: MutableList<Any>, holder: PostViewHolder, position: Int) {
-        payloads
+        val payload = payloads[0] as? List<*> ?: return
+        payload
                 .filter { it is ChangeType }
                 .forEach {
                     holder.apply {
@@ -76,8 +77,12 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
         }
 
         private fun PostEntity.loadImage() {
+            val imageSource: Any = when {
+                thumbnailUrl != null && thumbnailUrl.contains("(https?):/.*".toRegex()) -> thumbnailUrl
+                else -> R.drawable.reddit_icon_square
+            }
             requestManager
-                    .load(thumbnailUrl)
+                    .load(imageSource)
                     .into(post_thumb_image_view)
         }
 
@@ -100,7 +105,7 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
 
         private fun PostEntity.setDate() {
             val currentDate = Date()
-            val postDate = Date(createdDate.toLong() * 1000)
+            val postDate = Date(createdDate * 1000)
 
             var timeDifference = differenceBetweenInHours(postDate, currentDate)
             var postfixResId = R.plurals.hours_plural

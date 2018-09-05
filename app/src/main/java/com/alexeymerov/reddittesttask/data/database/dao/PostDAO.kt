@@ -20,7 +20,7 @@ interface PostDAO : BaseDAO<PostEntity> {
     @Query("SELECT * FROM post_entity ORDER BY $SCORE_ROW DESC")
     fun getAll(): List<PostEntity>
 
-    @Query("DELETE FROM post_entity WHERE $DATE_ROW < :millis")
-    fun clearPostsBefore(millis: Double)
+    @Query("DELETE FROM post_entity WHERE $DATE_ROW <= :timestamp")
+    fun clearPostsBefore(timestamp: Long)
 
 }

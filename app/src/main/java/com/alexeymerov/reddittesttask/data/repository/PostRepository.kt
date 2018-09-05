@@ -6,26 +6,29 @@ import com.alexeymerov.reddittesttask.data.database.entity.PostEntity
 import com.alexeymerov.reddittesttask.data.repository.contracts.IPostRepository
 import com.alexeymerov.reddittesttask.data.server.ServerCommunicator
 import com.alexeymerov.reddittesttask.data.server.pojo.response.PostsResponse
-import org.jetbrains.anko.doAsync
+import io.reactivex.Single
 
 
 class PostRepository(private val serverCommunicator: ServerCommunicator,
                      private val database: RedditDatabase
 ) : IPostRepository() {
 
+    private val liveData by lazy { database.postDao().getAllLive() }
+
     override fun getAllLive(): LiveData<List<PostEntity>> {
         requestPosts()
-        return database.postDao().getAllLive()
+        return liveData
     }
 
     private fun requestPosts(lastPostName: String? = null) {
-        val single = when (lastPostName) {
+        when (lastPostName) {
             null -> serverCommunicator.getPosts()
             else -> serverCommunicator.getPosts(lastPostName)
-        }
+        }.proceedRequest()
+    }
 
-        single
-                .map { parseRawData(it) }
+    private fun Single<PostsResponse>.proceedRequest() {
+        this.map { parseRawData(it) }
                 .doAfterSuccess { database.postDao().add(it) }
                 .compose(singleTransformer())
                 .subscribe()
@@ -43,10 +46,18 @@ class PostRepository(private val serverCommunicator: ServerCommunicator,
     override fun updatePosts() = requestPosts()
 
     override fun clearPostsBefore(millis: Long) {
-        doAsync {
-            synchronized(this) {
-                database.postDao().clearPostsBefore(millis.toDouble())
-            }
-        }
+        Single
+                .just(millis / 1000)
+                .doOnSuccess { database.postDao().clearPostsBefore(it) }
+                .compose(singleTransformer())
+                .subscribe()
+    }
+
+    override fun loadNextPosts(lastPostPosition: Int) {
+        Single.just(lastPostPosition)
+                .map { liveData.value?.get(lastPostPosition) }
+                .map { it.postName }
+                .flatMap { serverCommunicator.getPosts(it) }
+                .proceedRequest()
     }
 }

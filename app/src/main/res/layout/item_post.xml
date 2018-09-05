@@ -21,9 +21,7 @@
         android:paddingTop="4dp"
         >
 
-
         <FrameLayout
-
             android:id="@+id/post_rating_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +38,7 @@
                 android:drawableEnd="@drawable/ic_arrow_down"
                 android:drawableStart="@drawable/ic_arrow_up"
                 android:gravity="center"
-                android:textColor="@color/grey_75"
+                android:textColor="@color/secondaryText"
                 tools:text="380k"
                 />
 
@@ -69,7 +67,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textColor="@color/grey_75"
+            android:textColor="@color/secondaryText"
             app:layout_constraintBottom_toBottomOf="@+id/post_rating_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -86,7 +84,7 @@
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="5"
-            android:textColor="@color/black"
+            android:textColor="@color/primaryText"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/post_thumb_image_view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +99,8 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="4dp"
-            android:background="@color/grey_10"
+            android:alpha="0.25"
+            android:background="@color/divider"
             app:layout_constraintBottom_toTopOf="@+id/post_author_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

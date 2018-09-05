@@ -12,7 +12,8 @@ abstract class BaseRepository {
     }
 
     protected fun <T> singleTransformer(): SingleTransformer<T, T> = SingleTransformer {
-        it.subscribeOn(Schedulers.io())
+        it
+                .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .timeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .retry(DEFAULT_RETRY_ATTEMPTS)

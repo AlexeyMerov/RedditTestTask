@@ -39,7 +39,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    protected fun onInternetStateChanged(isConnected: Boolean) {
+    open fun onInternetStateChanged(isConnected: Boolean) {
 
     }
 

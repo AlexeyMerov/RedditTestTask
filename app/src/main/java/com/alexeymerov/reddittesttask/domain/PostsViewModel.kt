@@ -15,4 +15,6 @@ class PostsViewModel(application: Application, private val postRepository: IPost
     override fun updatePosts() = postRepository.updatePosts()
 
     override fun clearOldPosts() = postRepository.clearPostsBefore(Date().time - DAY_MILLIS)
+
+    override fun loadNextPosts(totalItemsCount: Int) = postRepository.loadNextPosts(totalItemsCount - 1)
 }

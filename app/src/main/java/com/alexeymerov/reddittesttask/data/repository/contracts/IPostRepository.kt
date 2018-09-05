@@ -13,4 +13,6 @@ abstract class IPostRepository : BaseRepository(), KoinComponent {
 
     abstract fun clearPostsBefore(millis: Long)
 
+    abstract fun loadNextPosts(lastPostPosition: Int)
+
 }
