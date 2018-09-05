@@ -3,7 +3,8 @@
     <string name="latest_posts">Latest posts</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="image_description">Image Thumbnail</string>
-    <string name="community">Community:\ </string>
+    <string name="community">r/</string>
+    <string name="x_hms_ago">%d %s ago</string>
 
     <plurals name="seconds_plural">
         <item quantity="one">second</item>

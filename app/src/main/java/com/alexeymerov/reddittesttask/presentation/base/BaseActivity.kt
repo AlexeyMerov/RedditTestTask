@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import com.alexeymerov.reddittesttask.R
@@ -24,12 +23,12 @@ import com.alexeymerov.reddittesttask.utils.extensions.makeVisible
 abstract class BaseActivity : AppCompatActivity() {
 
     private var noInternetView: View? = null
-    private var mNetworkStateBroadcastReceiver: BroadcastReceiver? = null
+    private var networkStateBroadcastReceiver: BroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mNetworkStateBroadcastReceiver = object : BroadcastReceiver() {
+        networkStateBroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 isNetworkConnected {
                     onInternetStateChanged(it)
@@ -51,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity() {
             addAction("android.net.conn.CONNECTIVITY_CHANGE")
             addAction("android.net.wifi.WIFI_STATE_CHANGED")
         }
-        registerReceiver(mNetworkStateBroadcastReceiver, filter)
+        registerReceiver(networkStateBroadcastReceiver, filter)
     }
 
     protected fun setNoIntenetView(view: View?) {
@@ -84,7 +83,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down)
+        overridePendingTransition(R.anim.fade_in_short, R.anim.slide_out_to_right)
     }
 
     protected fun setToolbarTitle(title: CharSequence) {
@@ -108,8 +107,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     override fun onStop() {
-        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
-        unregisterReceiver(mNetworkStateBroadcastReceiver)
+        unregisterReceiver(networkStateBroadcastReceiver)
         super.onStop()
     }
 

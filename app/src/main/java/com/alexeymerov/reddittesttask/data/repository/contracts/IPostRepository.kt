@@ -9,6 +9,8 @@ abstract class IPostRepository : BaseRepository(), KoinComponent {
 
     abstract fun getAllLive(): LiveData<List<PostEntity>>
 
-    abstract fun getAll(): List<PostEntity>
+    abstract fun updatePosts()
+
+    abstract fun clearPostsBefore(millis: Long)
 
 }

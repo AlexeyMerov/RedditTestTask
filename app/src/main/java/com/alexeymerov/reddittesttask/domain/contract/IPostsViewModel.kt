@@ -9,4 +9,8 @@ abstract class IPostsViewModel(application: Application) : BaseViewModel(applica
 
     abstract fun getPostsLive(): LiveData<List<PostEntity>>
 
+    abstract fun updatePosts()
+
+    abstract fun clearOldPosts()
+
 }

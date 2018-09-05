@@ -3,9 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/post_container_view"
     android:layout_width="match_parent"
-    android:layout_height="175dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="8dp"
     >
 
@@ -13,96 +15,85 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
+        android:paddingBottom="4dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
         >
+
+
+        <FrameLayout
+
+            android:id="@+id/post_rating_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/post_thumb_image_view"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/post_rating_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableStart="@drawable/ic_arrow_up"
+                android:gravity="center"
+                android:textColor="@color/grey_75"
+                tools:text="380k"
+                />
+
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/post_thumb_image_view"
             android:layout_width="100dp"
-            android:layout_height="75dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="2dp"
             android:contentDescription="@string/image_description"
             app:layout_constraintBottom_toTopOf="@+id/post_subreddit_text_view"
             app:layout_constraintEnd_toStartOf="@+id/post_title_text_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_rating_container"
             app:layout_constraintVertical_bias="0"
+            tools:scaleType="centerCrop"
             tools:src="@drawable/reddit_icon"
-            />
-
-        <TextView
-            android:id="@+id/post_title_text_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:ellipsize="end"
-            android:maxLines="4"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/first_divider_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/post_thumb_image_view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"
-            tools:text="Title Line 1\nTitle Line 2\nTitle Line 2\nTitle Line 2"
-            />
-
-        <TextView
-            android:id="@+id/post_rating_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24px"
-            android:drawableStart="@drawable/ic_baseline_keyboard_arrow_up_24px"
-            android:gravity="center"
-            android:layout_marginTop="3dp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/second_divider_view"
-            app:layout_constraintEnd_toStartOf="@+id/post_community_text_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_thumb_image_view"
-            tools:text="380k"
-            />
-
-        <View
-            android:id="@+id/first_divider_view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/grey_10"
-            app:layout_constraintBottom_toBottomOf="@+id/post_thumb_image_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/post_thumb_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/post_title_text_view"
-            app:layout_constraintVertical_bias="1"
-            />
-
-        <TextView
-            android:id="@+id/post_community_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="@string/community"
-            android:textColor="@color/grey"
-            app:layout_constraintBottom_toBottomOf="@+id/post_rating_text_view"
-            app:layout_constraintEnd_toStartOf="@+id/post_subreddit_text_view"
-            app:layout_constraintStart_toStartOf="@+id/post_title_text_view"
-            app:layout_constraintTop_toTopOf="@+id/post_rating_text_view"
             />
 
         <TextView
             android:id="@+id/post_subreddit_text_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="8dp"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/black"
             android:gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/post_rating_text_view"
+            android:maxLines="1"
+            android:textColor="@color/grey_75"
+            app:layout_constraintBottom_toBottomOf="@+id/post_rating_container"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/post_community_text_view"
-            app:layout_constraintTop_toTopOf="@+id/post_rating_text_view"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/post_thumb_image_view"
+            app:layout_constraintTop_toTopOf="@+id/post_rating_container"
             tools:text="subreddit"
+            />
+
+        <TextView
+            android:id="@+id/post_title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/post_thumb_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/post_thumb_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/post_rating_container"
+            app:layout_constraintVertical_bias="0"
+            tools:text="Title Line 1\nTitle Line 2\nTitle Line 2\nTitle Line 2\nTitle Line 2"
             />
 
         <View
@@ -114,19 +105,16 @@
             app:layout_constraintBottom_toTopOf="@+id/post_author_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_rating_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/post_thumb_image_view"
             />
 
         <TextView
             android:id="@+id/post_author_text_view"
+            style="@style/TextWithIcon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:drawableTop="@drawable/ic_baseline_person_24px"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_person"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_date_text_view"
             app:layout_constraintHorizontal_bias="0"
@@ -137,14 +125,11 @@
 
         <TextView
             android:id="@+id/post_date_text_view"
+            style="@style/TextWithIcon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:drawableTop="@drawable/ic_baseline_access_time_24px"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_time"
             app:layout_constraintBottom_toBottomOf="@+id/post_author_text_view"
             app:layout_constraintEnd_toEndOf="@+id/post_comments_text_view"
             app:layout_constraintStart_toEndOf="@+id/post_author_text_view"
@@ -154,14 +139,11 @@
 
         <TextView
             android:id="@+id/post_comments_text_view"
+            style="@style/TextWithIcon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:drawableTop="@drawable/ic_baseline_mode_comment_24px"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/black"
+            android:drawableStart="@drawable/ic_comment"
             app:layout_constraintBottom_toBottomOf="@+id/post_date_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/post_date_text_view"

@@ -7,7 +7,8 @@ import com.alexeymerov.reddittesttask.R
 import com.alexeymerov.reddittesttask.data.database.entity.PostEntity
 import com.alexeymerov.reddittesttask.presentation.base.BaseRecyclerAdapter
 import com.alexeymerov.reddittesttask.presentation.base.BaseViewHolder
-import com.alexeymerov.reddittesttask.utils.*
+import com.alexeymerov.reddittesttask.utils.differenceBetweenInHours
+import com.alexeymerov.reddittesttask.utils.differenceBetweenInMinutes
 import com.alexeymerov.reddittesttask.utils.extensions.dpToPx
 import com.alexeymerov.reddittesttask.utils.extensions.inflate
 import com.bumptech.glide.Glide
@@ -25,9 +26,11 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
         COMMENTS, LIKES
     }
 
+    var onItemClick: (item: PostEntity) -> Unit = {}
+
     private val requestOptions = RequestOptions()
-            .placeholder(R.drawable.reddit_icon)
-            .error(R.drawable.reddit_icon)
+            .placeholder(R.drawable.reddit_icon_square)
+            .error(R.drawable.reddit_icon_square)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .transforms(CenterCrop(), RoundedCorners(4.dpToPx()))
 
@@ -39,10 +42,8 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
 
     override fun compareContent(old: PostEntity, new: PostEntity): Any? {
         val changesList = mutableListOf<ChangeType>()
-
         if (old.numComments != new.numComments) changesList.add(ChangeType.COMMENTS)
         if (old.score != new.score) changesList.add(ChangeType.LIKES)
-
         return changesList
     }
 
@@ -51,8 +52,10 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
                 .filter { it is ChangeType }
                 .forEach {
                     holder.apply {
-                        if (it == ChangeType.COMMENTS) items[position].setComments()
-                        else if (it == ChangeType.LIKES) items[position].setScore()
+                        when (it) {
+                            ChangeType.COMMENTS -> items[position].setComments()
+                            ChangeType.LIKES -> items[position].setScore()
+                        }
                     }
                 }
     }
@@ -60,10 +63,11 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
     inner class PostViewHolder(containerView: View) : BaseViewHolder<PostEntity>(containerView) {
 
         override fun bind(currentItem: PostEntity) {
+            post_container_view.setOnClickListener { onItemClick.invoke(currentItem) }
             with(currentItem) {
                 loadImage()
                 post_title_text_view.text = title
-                post_subreddit_text_view.text = subReddit
+                post_subreddit_text_view.text = String.format("r/%s", subReddit)
                 post_author_text_view.text = authorName
                 setScore()
                 setDate()
@@ -71,7 +75,7 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
             }
         }
 
-        fun PostEntity.loadImage() {
+        private fun PostEntity.loadImage() {
             requestManager
                     .load(thumbnailUrl)
                     .into(post_thumb_image_view)
@@ -98,30 +102,17 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
             val currentDate = Date()
             val postDate = Date(createdDate.toLong() * 1000)
 
-            var timeDifference = differenceBetweenInMonths(postDate, currentDate)
-            var postfix = context.resources.getQuantityString(R.plurals.month_plural, timeDifference)
+            var timeDifference = differenceBetweenInHours(postDate, currentDate)
+            var postfixResId = R.plurals.hours_plural
 
             if (timeDifference == 0) {
-                timeDifference = differenceBetweenInDays(postDate, currentDate)
-                postfix = context.resources.getQuantityString(R.plurals.days_plural, timeDifference)
-
-                if (timeDifference == 0) {
-                    timeDifference = differenceBetweenInHours(postDate, currentDate)
-                    postfix = context.resources.getQuantityString(R.plurals.hours_plural, timeDifference)
-
-                    if (timeDifference == 0) {
-                        timeDifference = differenceBetweenInMinutes(postDate, currentDate)
-                        postfix = context.resources.getQuantityString(R.plurals.minutes_plural, timeDifference)
-
-                        if (timeDifference == 0) {
-                            timeDifference = differenceBetweenInSeconds(postDate, currentDate)
-                            postfix = context.resources.getQuantityString(R.plurals.seconds_plural, timeDifference)
-                        }
-                    }
-                }
+                timeDifference = differenceBetweenInMinutes(postDate, currentDate)
+                postfixResId = R.plurals.minutes_plural
             }
 
-            post_date_text_view.text = String.format("%d %s ago", timeDifference, postfix)
+            val postfix = context.resources.getQuantityString(postfixResId, timeDifference)
+
+            post_date_text_view.text = String.format(context.getString(R.string.x_hms_ago), timeDifference, postfix)
         }
 
     }

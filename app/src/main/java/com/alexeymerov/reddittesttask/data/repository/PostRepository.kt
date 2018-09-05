@@ -6,26 +6,27 @@ import com.alexeymerov.reddittesttask.data.database.entity.PostEntity
 import com.alexeymerov.reddittesttask.data.repository.contracts.IPostRepository
 import com.alexeymerov.reddittesttask.data.server.ServerCommunicator
 import com.alexeymerov.reddittesttask.data.server.pojo.response.PostsResponse
+import org.jetbrains.anko.doAsync
 
 
-class PostRepository(private val mServerCommunicator: ServerCommunicator,
-                     private val mDatabase: RedditDatabase
+class PostRepository(private val serverCommunicator: ServerCommunicator,
+                     private val database: RedditDatabase
 ) : IPostRepository() {
 
     override fun getAllLive(): LiveData<List<PostEntity>> {
         requestPosts()
-        return mDatabase.postDao().getAllLive()
+        return database.postDao().getAllLive()
     }
 
     private fun requestPosts(lastPostName: String? = null) {
         val single = when (lastPostName) {
-            null -> mServerCommunicator.getPosts()
-            else -> mServerCommunicator.getPosts(lastPostName)
+            null -> serverCommunicator.getPosts()
+            else -> serverCommunicator.getPosts(lastPostName)
         }
 
         single
                 .map { parseRawData(it) }
-                .doAfterSuccess { mDatabase.postDao().add(it) }
+                .doAfterSuccess { database.postDao().add(it) }
                 .compose(singleTransformer())
                 .subscribe()
     }
@@ -39,6 +40,13 @@ class PostRepository(private val mServerCommunicator: ServerCommunicator,
         return resultList
     }
 
-    override fun getAll() = mDatabase.postDao().getAll()
+    override fun updatePosts() = requestPosts()
 
+    override fun clearPostsBefore(millis: Long) {
+        doAsync {
+            synchronized(this) {
+                database.postDao().clearPostsBefore(millis.toDouble())
+            }
+        }
+    }
 }
