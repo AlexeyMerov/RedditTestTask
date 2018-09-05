@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">RedditTestTask</string>
+    <string name="latest_posts">Top popular for today</string>
+    <string name="no_internet_connection">Нет интернета</string>
+    <string name="image_description">Превью изображения</string>
+    <string name="community">r/</string>
+    <string name="x_hms_ago">%d %s назад</string>
+    <string name="you_don_t_have_any_posts_yet">У вас пока нет постов…</string>
+
+    <plurals name="seconds_plural">
+        <item quantity="one">%d секунда</item>
+        <item quantity="two">%d секунды</item>
+        <item quantity="few">%d секунд</item>
+        <item quantity="many">%d секунд</item>
+        <item quantity="other">%d секунд</item>
+    </plurals>
+
+    <plurals name="minutes_plural">
+        <item quantity="one">%d минута</item>
+        <item quantity="two">%d минуты</item>
+        <item quantity="few">%d минут</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минут</item>
+    </plurals>
+
+    <plurals name="hours_plural">
+        <item quantity="one">%d час</item>
+        <item quantity="few">%d часов</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часа</item>
+    </plurals>
+
+</resources>
