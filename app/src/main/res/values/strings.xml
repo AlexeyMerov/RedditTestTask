@@ -8,18 +8,18 @@
     <string name="you_don_t_have_any_posts_yet">You don\'t have any posts yet…</string>
 
     <plurals name="seconds_plural">
-        <item quantity="one">%d second</item>
-        <item quantity="other">%d seconds</item>
+        <item quantity="one">second</item>
+        <item quantity="other">seconds</item>
     </plurals>
 
     <plurals name="minutes_plural">
-        <item quantity="one">%d minute</item>
-        <item quantity="other">%d minutes</item>
+        <item quantity="one">minute</item>
+        <item quantity="other">minutes</item>
     </plurals>
 
     <plurals name="hours_plural">
-        <item quantity="one">%d hour</item>
-        <item quantity="other">%d hours</item>
+        <item quantity="one">hour</item>
+        <item quantity="other">hours</item>
     </plurals>
 
 </resources>
