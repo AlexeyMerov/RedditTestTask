@@ -1,7 +1,7 @@
 package com.alexeymerov.reddittesttask.presentation.base
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.alexeymerov.reddittesttask.utils.extensions.AutoUpdatableAdapter
 import kotlinx.android.extensions.LayoutContainer
 import kotlin.properties.Delegates
@@ -23,7 +23,7 @@ abstract class BaseRecyclerAdapter<T : Any, VH : BaseViewHolder<T>> : RecyclerVi
     open fun proceedPayloads(payloads: MutableList<Any>, holder: VH, position: Int) {}
 }
 
-abstract class BaseViewHolder<in T : Any>(override val containerView: View?)
+abstract class BaseViewHolder<in T : Any>(override val containerView: View)
     : RecyclerView.ViewHolder(containerView), LayoutContainer {
     abstract fun bind(currentItem: T)
 }

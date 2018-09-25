@@ -1,6 +1,6 @@
 package com.alexeymerov.reddittesttask.utils
 
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 
 open class BaseErrorsString {
     open fun isShort(): String = "Field is short"

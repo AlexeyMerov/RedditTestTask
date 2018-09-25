@@ -1,7 +1,7 @@
 package com.alexeymerov.reddittesttask.domain.contract
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.alexeymerov.reddittesttask.data.database.entity.PostEntity
 import com.alexeymerov.reddittesttask.domain.BaseViewModel
 

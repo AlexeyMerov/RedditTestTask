@@ -1,21 +1,21 @@
 package com.alexeymerov.reddittesttask.koin
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.alexeymerov.reddittesttask.data.database.RedditDatabase
 import com.alexeymerov.reddittesttask.data.repository.PostRepository
 import com.alexeymerov.reddittesttask.data.repository.contracts.IPostRepository
 import com.alexeymerov.reddittesttask.data.server.ServerCommunicator
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val repositoryModule: Module = applicationContext {
-    bean { provideSharedPrefs(androidApplication().applicationContext) }
-    bean { provideDatabase(androidApplication().applicationContext) }
-    bean { provideServerCommunicator() }
+val repositoryModule: Module = module {
+    single { provideSharedPrefs(androidApplication().applicationContext) }
+    single { provideDatabase(androidApplication().applicationContext) }
+    single { provideServerCommunicator() }
 
-    bean { PostRepository(get(), get()) as IPostRepository }
+    single { PostRepository(get(), get()) as IPostRepository }
 }
 
 private fun provideDatabase(context: Context) = Room

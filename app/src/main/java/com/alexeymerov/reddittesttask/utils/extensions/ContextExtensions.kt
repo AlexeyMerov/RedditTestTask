@@ -5,12 +5,12 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.net.ConnectivityManager
-import android.support.annotation.ColorRes
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 
 fun Activity.hideKeyboardEx() {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
