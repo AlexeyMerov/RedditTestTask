@@ -4,7 +4,7 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="image_description">Image Thumbnail</string>
     <string name="community">r/</string>
-    <string name="x_hms_ago">%d %s ago</string>
+    <string name="x_hms_ago" formatted="false">%d %s ago</string>
     <string name="you_don_t_have_any_posts_yet">You don\'t have any posts yet…</string>
 
     <plurals name="seconds_plural">

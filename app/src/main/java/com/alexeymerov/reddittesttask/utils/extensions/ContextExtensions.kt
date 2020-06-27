@@ -27,7 +27,7 @@ fun Context.getColorEx(@ColorRes colorId: Int) = ContextCompat.getColor(this, co
 
 fun Activity.copyToClipBoard(text: String, label: String = "simpleLabel") {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    clipboard.primaryClip = ClipData.newPlainText(label, text)
+    clipboard.setPrimaryClip(ClipData.newPlainText(label, text))
 }
 
 inline fun Context.isNetworkConnected(f: (Boolean) -> Unit) {

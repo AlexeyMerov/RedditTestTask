@@ -4,8 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.alexeymerov.reddittesttask.data.database.dao.PostDAO
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 @Entity(tableName = PostDAO.TABLE_NAME)
+@JsonClass(generateAdapter = true)
 data class PostEntity(
         @PrimaryKey
         @Json(name = "id")

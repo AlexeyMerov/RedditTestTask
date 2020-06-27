@@ -6,24 +6,24 @@
     <string name="no_internet_connection">Нет интернета</string>
     <string name="image_description">Превью изображения</string>
     <string name="community">r/</string>
-    <string name="x_hms_ago">%d %s назад</string>
+    <string name="x_hms_ago" formatted="false">%d %s назад</string>
     <string name="you_don_t_have_any_posts_yet">У вас пока нет постов…</string>
 
-    <plurals name="seconds_plural">
-        <item quantity="one">секунда</item>
-        <item quantity="two">секунды</item>
-        <item quantity="few">секунд</item>
-        <item quantity="many">секунд</item>
-        <item quantity="other">секунд</item>
-    </plurals>
+	<plurals name="seconds_plural" tools:ignore="UnusedQuantity">
+		<item quantity="one">секунда</item>
+		<item quantity="two">секунды</item>
+		<item quantity="few">секунд</item>
+		<item quantity="many">секунд</item>
+		<item quantity="other">секунд</item>
+	</plurals>
 
-    <plurals name="minutes_plural">
-        <item quantity="one">минута</item>
-        <item quantity="two">минуты</item>
-        <item quantity="few">минут</item>
-        <item quantity="many">минут</item>
-        <item quantity="other">минут</item>
-    </plurals>
+	<plurals name="minutes_plural" tools:ignore="UnusedQuantity">
+		<item quantity="one">минута</item>
+		<item quantity="two">минуты</item>
+		<item quantity="few">минут</item>
+		<item quantity="many">минут</item>
+		<item quantity="other">минут</item>
+	</plurals>
 
     <plurals name="hours_plural">
         <item quantity="one">час</item>
