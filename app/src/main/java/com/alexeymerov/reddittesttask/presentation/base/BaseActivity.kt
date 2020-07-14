@@ -6,14 +6,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.annotation.DrawableRes
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.alexeymerov.reddittesttask.R
 import com.alexeymerov.reddittesttask.utils.extensions.hideKeyboardEx
 import com.alexeymerov.reddittesttask.utils.extensions.isNetworkConnected

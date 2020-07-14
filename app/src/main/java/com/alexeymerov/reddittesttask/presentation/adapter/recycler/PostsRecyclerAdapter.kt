@@ -29,10 +29,10 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
     var onItemClick: (item: PostEntity) -> Unit = {}
 
     private val requestOptions = RequestOptions()
-            .placeholder(R.drawable.reddit_icon_square)
-            .error(R.drawable.reddit_icon_square)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .transforms(CenterCrop(), RoundedCorners(4.dpToPx()))
+        .placeholder(R.drawable.reddit_icon_square)
+        .error(R.drawable.reddit_icon_square)
+        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+        .transform(CenterCrop(), RoundedCorners(4.dpToPx()))
 
     private val requestManager: RequestManager = Glide.with(context).setDefaultRequestOptions(requestOptions)
 
@@ -50,15 +50,15 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
     override fun proceedPayloads(payloads: MutableList<Any>, holder: PostViewHolder, position: Int) {
         val payload = payloads[0] as? List<*> ?: return
         payload
-                .filter { it is ChangeType }
-                .forEach {
-                    holder.apply {
-                        when (it) {
-                            ChangeType.COMMENTS -> items[position].setComments()
-                            ChangeType.LIKES -> items[position].setScore()
-                        }
+            .filter { it is ChangeType }
+            .forEach {
+                holder.apply {
+                    when (it) {
+                        ChangeType.COMMENTS -> items[position].setComments()
+                        ChangeType.LIKES -> items[position].setScore()
                     }
                 }
+            }
     }
 
     inner class PostViewHolder(containerView: View) : BaseViewHolder<PostEntity>(containerView) {
@@ -82,8 +82,8 @@ class PostsRecyclerAdapter(val context: Context) : BaseRecyclerAdapter<PostEntit
                 else -> R.drawable.reddit_icon_square
             }
             requestManager
-                    .load(imageSource)
-                    .into(post_thumb_image_view)
+                .load(imageSource)
+                .into(post_thumb_image_view)
         }
 
         fun PostEntity.setComments() {

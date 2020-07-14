@@ -2,16 +2,12 @@ package com.alexeymerov.reddittesttask.utils.extensions
 
 import android.animation.Animator
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.AnimRes
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
@@ -22,6 +18,12 @@ import android.view.animation.RotateAnimation
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.AnimRes
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 fun View.showToast(text: Any) = Toast.makeText(this.context, text.toString(), Toast.LENGTH_SHORT).show()
 
@@ -80,35 +82,35 @@ fun View.showUp() {
 
 fun View.showDown() {
     animate()
-            .translationYBy(-height.toFloat())
-            .setDuration(175)
-            .addAnimatorListener {
-                onStart { this@showDown.makeVisible() }
-            }
+        .translationYBy(-height.toFloat())
+        .setDuration(175)
+        .addAnimatorListener {
+            onStart { this@showDown.makeVisible() }
+        }
 }
 
 fun View.hideUp() {
     animate()
-            .translationY(height.toFloat())
-            .setDuration(175)
-            .addAnimatorListener {
-                onEnd { this@hideUp.makeVisible(false) }
-            }
+        .translationY(height.toFloat())
+        .setDuration(175)
+        .addAnimatorListener {
+            onEnd { this@hideUp.makeVisible(false) }
+        }
 }
 
 fun View.fadeIn() {
     animate().alpha(1f)
-            .setDuration(175)
-            .addAnimatorListener {
-                onStart { this@fadeIn.makeVisible() }
-            }
+        .setDuration(175)
+        .addAnimatorListener {
+            onStart { this@fadeIn.makeVisible() }
+        }
 }
 
 fun View.fadeOut() {
     animate().alpha(0f).setDuration(175)
-            .addAnimatorListener {
-                onEnd { this@fadeOut.makeVisible(false) }
-            }
+        .addAnimatorListener {
+            onEnd { this@fadeOut.makeVisible(false) }
+        }
 }
 
 inline fun ViewPropertyAnimator.addAnimatorListener(f: AnimatorListener.() -> Unit): ViewPropertyAnimator = setListener(AnimatorListener().apply(f))
@@ -178,9 +180,9 @@ fun ViewGroup.inflate(layoutRes: Int): View = LayoutInflater.from(context).infla
 fun View.setCircleColor(colorHexString: String) = setRoundedBackground(Color.parseColor(colorHexString))
 
 fun View.setRoundedBackground(color: Int) {
-    when (this.background) {
-        is GradientDrawable -> (this.background as GradientDrawable).setColor(color)
-        else -> this.background.setColorFilter(color, PorterDuff.Mode.OVERLAY)
+    when (background) {
+        is GradientDrawable -> (background as GradientDrawable).setColor(color)
+        else -> background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(color, BlendModeCompat.OVERLAY)
     }
 }
 
@@ -212,14 +214,16 @@ fun View.changeSize(width: Int = -1, height: Int = -1) {
     }
 }
 
-fun getRotateAnimation() = RotateAnimation(0.0f, 360.0f,
-        Animation.RELATIVE_TO_SELF, 0.5f,
-        Animation.RELATIVE_TO_SELF, 0.5f)
-        .apply {
-            interpolator = LinearInterpolator()
-            repeatCount = -1
-            duration = 1000
-        }
+fun getRotateAnimation() = RotateAnimation(
+    0.0f, 360.0f,
+    Animation.RELATIVE_TO_SELF, 0.5f,
+    Animation.RELATIVE_TO_SELF, 0.5f
+)
+    .apply {
+        interpolator = LinearInterpolator()
+        repeatCount = -1
+        duration = 1000
+    }
 
 fun RecyclerView.setScrollListenerOnResizeActivity(layoutManager: LinearLayoutManager): View.OnLayoutChangeListener {
     return View.OnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
@@ -233,5 +237,5 @@ fun RecyclerView.setScrollListenerOnResizeActivity(layoutManager: LinearLayoutMa
 }
 
 fun View.makeVisible(visible: Boolean = true) {
-    visibility = if (visible) View.VISIBLE else View.GONE
+    visibility = if (visible) VISIBLE else GONE
 }

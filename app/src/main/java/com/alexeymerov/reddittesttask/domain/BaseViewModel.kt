@@ -1,8 +1,8 @@
 package com.alexeymerov.reddittesttask.domain
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
+import androidx.lifecycle.AndroidViewModel
 import com.alexeymerov.reddittesttask.App
 
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {

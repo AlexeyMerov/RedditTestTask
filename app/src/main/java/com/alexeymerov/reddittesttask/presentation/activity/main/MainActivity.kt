@@ -1,11 +1,11 @@
 package com.alexeymerov.reddittesttask.presentation.activity.main
 
-import android.arch.lifecycle.Observer
 import android.net.Uri
 import android.os.Bundle
-import android.support.customtabs.CustomTabsIntent
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alexeymerov.reddittesttask.R
 import com.alexeymerov.reddittesttask.WEB_URL
 import com.alexeymerov.reddittesttask.data.database.entity.PostEntity
@@ -18,7 +18,7 @@ import com.alexeymerov.reddittesttask.utils.extensions.isVisible
 import com.alexeymerov.reddittesttask.utils.extensions.makeVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_no_internet_panel.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : BaseActivity() {
